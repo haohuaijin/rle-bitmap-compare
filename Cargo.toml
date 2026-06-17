@@ -1,0 +1,40 @@
+[package]
+name = "rle-bitmap-compare"
+version = "0.1.0"
+edition = "2024"
+license = "MIT OR Apache-2.0"
+description = "Micro-benchmark comparing ParquetAccessPlan representations (RLE vs bitmap) against a no-index baseline on a synthetic FTS workload."
+repository = "https://github.com/haohuaijin/rle-bitmap-compare"
+keywords = ["parquet", "datafusion", "arrow", "fts", "benchmark"]
+categories = ["database"]
+readme = "README.md"
+
+[dependencies]
+datafusion = { git = "https://github.com/haohuaijin/arrow-datafusion", branch = "use-mask-in-datafusion" }
+futures = "0.3"
+rayon = "1.10"
+tokio = { version = "1", features = ["rt-multi-thread"] }
+
+[profile.release]
+opt-level = 3
+debug = false
+
+# The bitmap-backed `RowSelection::from_boolean_buffer` constructor used by the
+# "bitmap" strategy lives on a feature branch in this fork until it lands
+# upstream. Pinning every arrow-* crate keeps the version graph consistent.
+[patch.crates-io]
+arrow = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
+arrow-arith = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
+arrow-array = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
+arrow-buffer = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
+arrow-cast = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
+arrow-csv = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
+arrow-data = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
+arrow-ipc = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
+arrow-json = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
+arrow-ord = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
+arrow-row = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
+arrow-schema = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
+arrow-select = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
+arrow-string = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
+parquet = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }

@@ -1,0 +1,6 @@
+/target
+/data-fts/
+/data-fts-*/
+*.parquet
+*.parquet.tmp
+.DS_Store
