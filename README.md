@@ -2,7 +2,11 @@
 
 Micro-benchmark for `ParquetAccessPlan` representations on a synthetic FTS workload — RLE (`Vec<RowSelector>`) vs bitmap (`BooleanBuffer`) vs no index.
 
-The bitmap path needs the patched arrow-rs branch (`export-mask`, exposes `RowSelection::from_boolean_buffer`) and the matching datafusion fork (`use-mask-in-datafusion`) pinned in `Cargo.toml`.
+The bitmap path uses the upstream arrow-rs merge commit for
+[`apache/arrow-rs#10141`](https://github.com/apache/arrow-rs/pull/10141),
+which exposes `RowSelection::from_boolean_buffer`. It still uses the matching
+DataFusion fork (`use-mask-in-datafusion`) until DataFusion preserves the mask
+through `ParquetAccessPlan::into_overall_row_selection`.
 
 ## Workload
 
@@ -22,7 +26,7 @@ The bitmap path needs the patched arrow-rs branch (`export-mask`, exposes `RowSe
 ## Running
 
 ```bash
-# 1. Build (first run pulls the patched forks, ~3 min).
+# 1. Build (the first run pulls the pinned git dependencies, ~3 min).
 cargo build --release
 
 # 2. Generate the dataset (~9.8 GB on disk).

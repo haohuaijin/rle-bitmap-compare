@@ -19,22 +19,21 @@ tokio = { version = "1", features = ["rt-multi-thread"] }
 opt-level = 3
 debug = false
 
-# The bitmap-backed `RowSelection::from_boolean_buffer` constructor used by the
-# "bitmap" strategy lives on a feature branch in this fork until it lands
-# upstream. Pinning every arrow-* crate keeps the version graph consistent.
+# `RowSelection::from_boolean_buffer` landed upstream in apache/arrow-rs#10141.
+# Pin the merge commit until a crates.io release containing it is available.
 [patch.crates-io]
-arrow = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
-arrow-arith = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
-arrow-array = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
-arrow-buffer = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
-arrow-cast = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
-arrow-csv = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
-arrow-data = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
-arrow-ipc = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
-arrow-json = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
-arrow-ord = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
-arrow-row = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
-arrow-schema = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
-arrow-select = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
-arrow-string = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
-parquet = { git = "https://github.com/haohuaijin/arrow-rs", branch = "export-mask" }
+arrow = { git = "https://github.com/apache/arrow-rs", rev = "f0ec758f4fb548de7fa32312377d8f57f8e5002a" }
+arrow-arith = { git = "https://github.com/apache/arrow-rs", rev = "f0ec758f4fb548de7fa32312377d8f57f8e5002a" }
+arrow-array = { git = "https://github.com/apache/arrow-rs", rev = "f0ec758f4fb548de7fa32312377d8f57f8e5002a" }
+arrow-buffer = { git = "https://github.com/apache/arrow-rs", rev = "f0ec758f4fb548de7fa32312377d8f57f8e5002a" }
+arrow-cast = { git = "https://github.com/apache/arrow-rs", rev = "f0ec758f4fb548de7fa32312377d8f57f8e5002a" }
+arrow-csv = { git = "https://github.com/apache/arrow-rs", rev = "f0ec758f4fb548de7fa32312377d8f57f8e5002a" }
+arrow-data = { git = "https://github.com/apache/arrow-rs", rev = "f0ec758f4fb548de7fa32312377d8f57f8e5002a" }
+arrow-ipc = { git = "https://github.com/apache/arrow-rs", rev = "f0ec758f4fb548de7fa32312377d8f57f8e5002a" }
+arrow-json = { git = "https://github.com/apache/arrow-rs", rev = "f0ec758f4fb548de7fa32312377d8f57f8e5002a" }
+arrow-ord = { git = "https://github.com/apache/arrow-rs", rev = "f0ec758f4fb548de7fa32312377d8f57f8e5002a" }
+arrow-row = { git = "https://github.com/apache/arrow-rs", rev = "f0ec758f4fb548de7fa32312377d8f57f8e5002a" }
+arrow-schema = { git = "https://github.com/apache/arrow-rs", rev = "f0ec758f4fb548de7fa32312377d8f57f8e5002a" }
+arrow-select = { git = "https://github.com/apache/arrow-rs", rev = "f0ec758f4fb548de7fa32312377d8f57f8e5002a" }
+arrow-string = { git = "https://github.com/apache/arrow-rs", rev = "f0ec758f4fb548de7fa32312377d8f57f8e5002a" }
+parquet = { git = "https://github.com/apache/arrow-rs", rev = "f0ec758f4fb548de7fa32312377d8f57f8e5002a" }
